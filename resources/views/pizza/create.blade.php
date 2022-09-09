@@ -24,7 +24,7 @@
             <div class="card">
                 <div class="card-header">Pizza</div>
                 <div class="card-body">
-                    <form action="{{ route('pizza.store') }}" method="post">
+                    <form action="{{ route('pizza.store') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
                             <label for="name">Name Of Pizza</label>
