@@ -5,6 +5,11 @@
         margin: 0 0 25px 0;
     }  
 </style>
+@if(Session::has('successful'))
+<div class="alert alert-success">
+  {{ Session::get('successful')}}
+</div>
+@endif
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-4">

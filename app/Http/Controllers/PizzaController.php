@@ -44,9 +44,8 @@ class PizzaController extends Controller
             'large_pizza_price'=>$request->large_pizza_price,
             'category'=>$request->category,
             'image'=>$path
-            
-
         ]);
+          return redirect()->back()->with('successful' , 'Pizza added  successfully');
     }
 
     /**
