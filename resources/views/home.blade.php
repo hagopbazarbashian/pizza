@@ -1,1 +1,1 @@
-<a href="{{ route('pizza.create') }}"><h2>List of Pizza</h2></a>
+<a href="{{ route('pizza.index') }}"><h2>List of Pizza</h2></a>

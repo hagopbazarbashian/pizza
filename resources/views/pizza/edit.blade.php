@@ -12,44 +12,31 @@
 @endif
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-header">Menu</div>
-                <div class="card-body">
-                   <ul class="list-group">
-                    <a href="{{ route('pizza.create') }}" class="list-group-item list-group-item-action">View</a>
-                    <a href="{{ route('pizza.index') }}" class="list-group-item list-group-item-action">Create</a>
-                    
-                   </ul>
-                </div>
-            </div>
-        </div>
-        
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">Pizza</div>
                 <div class="card-body">
-                    <form action="{{ route('pizza.store') }}" method="post" enctype="multipart/form-data">
+                    <form action="" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
                             <label for="name">Name Of Pizza</label>
-                            <input type="text" class="form-control" name="name">
+                            <input type="text" class="form-control" name="name" value="{{ $pizzas->name }}">
                             <span style="color:red">@error('name') {{ $message }}@enderror</span>
                            </div>
                         
                             <div class="form-group">
                              <label for="name">Description Of Pizza</label>
-                             <textarea type="text" class="form-control" name="description"></textarea>
+                             <textarea type="text" class="form-control" name="description" value="{{ $pizzas->description }}">{{ $pizzas->description }}</textarea>
                              <span style="color:red">@error('description') {{ $message }}@enderror</span>
                             </div>
                             <div class="form-group">
                                 <div class="form-inline">
                                     <label >pizza price($)</label>
-                                    <input type="number" class="form-control" name="small_pizza_price" placeholder="small pizza price">
+                                    <input type="number" class="form-control" name="small_pizza_price" value="{{ $pizzas->small_pizza_price}}">
                                     <span style="color:red">@error('small_pizza_price') {{ $message }}@enderror</span>
-                                    <input type="number" class="form-control" name="medium_pizza_price" placeholder="medium pizza price">
+                                    <input type="number" class="form-control" name="medium_pizza_price" value="{{ $pizzas->medium_pizza_price}}">
                                     <span style="color:red">@error('medium_pizza_price') {{ $message }}@enderror</span>
-                                    <input type="number" class="form-control" name="large_pizza_price" placeholder="larg pizza price">
+                                    <input type="number" class="form-control" name="large_pizza_price" value="{{ $pizzas->large_pizza_price}}">
                                     <span style="color:red">@error('large_pizza_price') {{ $message }}@enderror</span>
                                 </div>
                             </div>
@@ -67,6 +54,7 @@
                                 <label>Image</label>
                                 <input type="file" class="form-control" name="image">
                                 <span style="color:red">@error('image') {{ $message }}@enderror</span>
+                                <img src="{{ Storage::url($pizzas->image) }}" width="80">
                             </div>
         
                             <div class="form-group text-center">

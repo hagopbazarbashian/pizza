@@ -14,7 +14,7 @@ class PizzaController extends Controller
      */
     public function index()
     {
-        return view('pizza.index');
+        return view('pizza.create');
     }
 
     /**
@@ -24,7 +24,10 @@ class PizzaController extends Controller
      */
     public function create()
     {
-        return view('pizza.create');
+        $Pizza = Pizza::All();
+        return view('pizza.view')->with([
+            'pizzas'=>$Pizza
+        ]);
     }
 
     /**
@@ -56,7 +59,7 @@ class PizzaController extends Controller
      */
     public function show($id)
     {
-        //
+          
     }
 
     /**
@@ -67,7 +70,8 @@ class PizzaController extends Controller
      */
     public function edit($id)
     {
-        //
+         $pizzas = Pizza::findOrFail($id);
+          return view('pizza.edit',compact('pizzas'));
     }
 
     /**
