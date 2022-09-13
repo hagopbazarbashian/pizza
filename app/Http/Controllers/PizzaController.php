@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\PizzaStoreRequest;
+use App\Http\Requests\UpdateRequest;
 use App\Models\Pizza;
 class PizzaController extends Controller
 {
@@ -24,7 +25,7 @@ class PizzaController extends Controller
      */
     public function create()
     {
-        $Pizza = Pizza::All();
+        $Pizza = Pizza::paginate(5);
         return view('pizza.view')->with([
             'pizzas'=>$Pizza
         ]);
@@ -81,9 +82,27 @@ class PizzaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateRequest $request, $id)
     {
-        //
+        $pizzas = Pizza::findOrFail($id);
+        if($request->has('image')){
+            $path = $request->image->store('public/pizza');
+        }else{
+            $pizzas->image;
+
+            $pizzas->update([
+                'name'=>$request->name,
+                'description'=>$request->description,
+                'small_pizza_price'=>$request->small_pizza_price,
+                'medium_pizza_price'=>$request->medium_pizza_price,
+                'large_pizza_price'=>$request->large_pizza_price,
+                'category'=>$request->category,
+                'image'=>$path
+            ]);
+        }
+        
+        return redirect()->route('pizza.create')->with('update' , 'Pizza Updated  successfully');
+
     }
 
     /**
@@ -94,6 +113,7 @@ class PizzaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $pizza = Pizza::findOrFail($id)->delete();
+        return redirect()->back()->with('delate' , 'Pizza removed.');
     }
 }

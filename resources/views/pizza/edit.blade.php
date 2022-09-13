@@ -16,7 +16,8 @@
             <div class="card">
                 <div class="card-header">Pizza</div>
                 <div class="card-body">
-                    <form action="" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('pizza.update',$pizzas->id) }}" method="post" enctype="multipart/form-data">
+                        @method('PATCH') 
                         @csrf
                         <div class="form-group">
                             <label for="name">Name Of Pizza</label>
