@@ -23,7 +23,7 @@ class PizzaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create() 
     {
         $Pizza = Pizza::paginate(5);
         return view('pizza.view')->with([
