@@ -22,7 +22,7 @@
 @endif
 <div class="col-lg-12">
     <div class="table-responsive"> 
-      <a href="{{ route('pizza.index') }}"><button class="btn btn-primary">Add Pizza</button></a>
+      <a href="{{ url('/home') }}"><button class="btn btn-primary">Add Pizza</button></a>
       <table class="table table-bordered"> 
         <thead> 
           <tr>

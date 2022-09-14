@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PizzaController;
+use App\Http\Controllers\UserOrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,4 +23,9 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::resource('pizza' ,PizzaController::class);
+Route::group(['middleware'=>'auth','admin'] ,function(){
+    Route::resource('pizza' ,PizzaController::class);
+
+    // User order
+   Route::get('/order-user' , [UserOrderController::class , 'index'])->name('order-user');
+});
