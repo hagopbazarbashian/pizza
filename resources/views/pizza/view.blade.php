@@ -26,7 +26,7 @@
       <table class="table table-bordered"> 
         <thead> 
           <tr>
-            <th scope="col">#</th>
+            <th scope="col">#</th>  
             <th scope="col">Image Pizza</th>
             <th scope="col">Pizza Name</th>
             <th scope="col">Description Pizza</th>
