@@ -20,6 +20,12 @@
   {{ Session::get('delate')}}
 </div>
 @endif
+@if(Session::has('successful-update'))
+<div class="alert alert-success">
+  {{ Session::get('successful-update')}}
+</div>
+@endif
+
 <div class="container">
     <div class="row justify-content-center">
         {{-- <div class="col-md-4">
@@ -38,7 +44,7 @@
                           <table class="table table-bordered"> 
                             <thead> 
                               <tr>
-                                  <th>#</th>
+                                  {{-- <th>#</th> --}}
                                   <th>User</th> 
                                   <th>Phone/Email</th> 
                                   <th>Date/Time</th> 
@@ -46,6 +52,7 @@
                                   <th>Small Pizza</th> 
                                   <th>Medium Pizza</th>
                                   <th>large Pizza</th>
+                                  <th>Total($)</th>
                                   <th>Message</th>
                                   <th>Status</th>
                                   <th>accept</th>
@@ -54,15 +61,35 @@
                                </tr> 
                             </thead> 
                             <tbody> 
-                                  <tr> 
-                                    <th scope="row">1</th> 
-                                    <td>Table cell</td> 
-                                    <td>Table cell</td> 
-                                    <td>Table cell</td> 
-                                    <td>Table cell</td> 
-                                    <td>Table cell</td> 
-                                    <td>Table cell</td> 
-                                  </tr> 
+                                    @if (count($orders)>0)
+                                    @foreach ($orders as $key => $order)
+                                    <tr>
+                                    {{-- <th scope="row">{{ $key+1 }}</th>  --}}
+                                    <td>{{ $order->user->name }}</td> 
+                                    <td>{{ $order->user->email }}<br>{{ $order->phone }}</td> 
+                                    <td>{{ $order->date }} / {{ $order->time }}</td> 
+                                    <td>{{ $order->pizza->name }}</td> 
+                                    <td>{{ $order->small_pizza }}</td> 
+                                    <td>{{ $order->medium_pizza}}</td>
+                                    <td>{{ $order->large_pizza}}</td>
+                                    <td>{{ ($order->pizza->small_pizza_price * $order->small_pizza)+($order->pizza->medium_pizza_price * $order->medium_pizza)+($order->pizza->large_pizza_price * $order->large_pizza)}}</td>  
+                                    <td>{{ $order->body}}</td> 
+                                    <td>{{ $order->status}}</td> 
+                                    <form action="{{ route('change',$order->id) }}"  method="post">
+                                      @csrf
+                                      <td>
+                                        <input name="status"  type="submit" value="accepted" class="btn btn-primary btn-sm">
+                                      </td> 
+                                      <td>
+                                        <input name="status"  type="submit" value="Reject" class="btn btn-danger btn-sm">
+                                      </td>
+                                      <td>
+                                        <input name="status"  type="submit" value="Completed" class="btn btn-success btn-sm">
+                                      </td>
+                                    </form>
+                                    </tr>
+                                    @endforeach  
+                                    @endif 
                                 </tbody> 
                                </table> 
                              </div>

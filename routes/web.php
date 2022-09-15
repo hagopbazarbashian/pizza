@@ -28,4 +28,5 @@ Route::group(['middleware'=>'auth','admin'] ,function(){
 
     // User order
    Route::get('/order-user' , [UserOrderController::class , 'index'])->name('order-user');
+   Route::post('change/{id}' ,[UserOrderController::class ,'change'])->name('change');
 });

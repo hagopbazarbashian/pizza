@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Order;
 
 class UserOrderController extends Controller
 {
@@ -13,7 +14,10 @@ class UserOrderController extends Controller
      */
     public function index()
     {
-         return view('order.index');
+         $Order = Order::orderBy('id' ,'DESC')->get();
+         return view('order.index')->with([
+            'orders'=>$Order
+         ]);
     }
 
     /**
@@ -80,5 +84,14 @@ class UserOrderController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    public function change(Request $request ,$id){
+       $Order = Order::find($id);
+       $Order->update([
+        'status'=>$request->status
+       ]);
+       return redirect()->back()->with('successful-update' ,'Update Status successfully');
     }
 }
