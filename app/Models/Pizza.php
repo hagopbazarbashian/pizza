@@ -12,11 +12,12 @@ class Pizza extends Model
     protected $fillable = [
         'name',
         'description',
-        'small_pizza_price',
+        'small_pizza_price',  
         'medium_pizza_price',
         'large_pizza_price',
         'category',
-        'image'
+        'image',
+       
     ];
 
 

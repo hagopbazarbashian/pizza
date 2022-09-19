@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Order;
+use App\Models\User;
 
 class UserOrderController extends Controller
 {
@@ -14,9 +15,9 @@ class UserOrderController extends Controller
      */
     public function index()
     {
-         $Order = Order::orderBy('id' ,'DESC')->get();
+         $Orders = Order::orderBy('id' ,'DESC')->get();
          return view('order.index')->with([
-            'orders'=>$Order
+            'orders'=>$Orders
          ]);
     }
 
@@ -93,5 +94,14 @@ class UserOrderController extends Controller
         'status'=>$request->status
        ]);
        return redirect()->back()->with('successful-update' ,'Update Status successfully');
+    }
+
+
+    public function customers(){
+        
+        $users = User::where('is_admin' , 0)->paginate(10);
+        return view('customers')->with([
+            'users'=>$users
+        ]);
     }
 }

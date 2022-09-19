@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PizzaController;
 use App\Http\Controllers\UserOrderController;
+use App\Http\Controllers\FrontController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,18 +16,18 @@ use App\Http\Controllers\UserOrderController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/' , [FrontController::class ,'index'])->name('filter');
+Route::get('pizza/{id}/my_pizza' , [FrontController::class , 'show'])->name('pizza');
+Route::post('pizza/order',[FrontController::class , 'store'])->name('order');
+Route::get('/user_order', [FrontController::class , 'user_order'])->name('user_order');
 
-Route::group(['middleware'=>'auth','admin'] ,function(){
+Route::group(['prefix'=>'admin','middleware'=>'auth','admin'] ,function(){
     Route::resource('pizza' ,PizzaController::class);
-
     // User order
    Route::get('/order-user' , [UserOrderController::class , 'index'])->name('order-user');
    Route::post('change/{id}' ,[UserOrderController::class ,'change'])->name('change');
+   Route::get('/customers' , [UserOrderController::class ,'customers'])->name('customer');
 });

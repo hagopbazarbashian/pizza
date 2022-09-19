@@ -35,7 +35,7 @@
             <th scope="col">Large pizza price</th>
             <th scope="col">Category</th>
             <th scope="col">Action</th>
-           </tr> 
+           </tr>  
         </thead> 
         <tbody> 
               <tr> 

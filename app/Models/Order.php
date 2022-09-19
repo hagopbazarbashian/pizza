@@ -12,7 +12,7 @@ class Order extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
+        'user_id',  
         'date',
         'time',
         'pizza_id',
@@ -20,7 +20,8 @@ class Order extends Model
         'medium_pizza',
         'large_pizza',
         'body',
-        'status'
+        'status',
+        'phone'
     ];
 
     public function user(){

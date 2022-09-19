@@ -54,10 +54,7 @@
                                   <th>large Pizza</th>
                                   <th>Total(AMD)</th>
                                   <th>Message</th>
-                                  <th>Status</th>
-                                  <th>accept</th>
-                                  <th>Reject</th>
-                                  <th>Completed</th>    
+                                  <th>Status</th>  
                                </tr> 
                             </thead> 
                             <tbody> 
@@ -75,18 +72,6 @@
                                     <td>{{ ($order->pizza->small_pizza_price * $order->small_pizza)+($order->pizza->medium_pizza_price * $order->medium_pizza)+($order->pizza->large_pizza_price * $order->large_pizza)}} AMD</td>  
                                     <td>{{ $order->body}}</td> 
                                     <td>{{ $order->status}}</td> 
-                                    <form action="{{ route('change',$order->id) }}"  method="post">
-                                      @csrf
-                                      <td>
-                                        <input name="status"  type="submit" value="accepted" class="btn btn-primary btn-sm">
-                                      </td> 
-                                      <td>
-                                        <input name="status"  type="submit" value="Reject" class="btn btn-danger btn-sm">
-                                      </td>
-                                      <td>
-                                        <input name="status"  type="submit" value="Completed" class="btn btn-success btn-sm">
-                                      </td>
-                                    </form>
                                     </tr>
                                     @endforeach  
                                     @endif 
