@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PizzaController;
 use App\Http\Controllers\UserOrderController;
 use App\Http\Controllers\FrontController;
+use App\Http\Controllers\FeedBackController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,7 @@ Route::get('/' , [FrontController::class ,'index'])->name('filter');
 Route::get('pizza/{id}/my_pizza' , [FrontController::class , 'show'])->name('pizza');
 Route::post('pizza/order',[FrontController::class , 'store'])->name('order');
 Route::get('/user_order', [FrontController::class , 'user_order'])->name('user_order');
+Route::post('ContactUs' , [FeedBackController::class , 'sendus'])->name('contactus');
 
 Route::group(['prefix'=>'admin','middleware'=>'auth','admin'] ,function(){
     Route::resource('pizza' ,PizzaController::class);
